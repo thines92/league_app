@@ -1,5 +1,4 @@
 import React from "react";
-import RiotGames from "../api/RiotGames";
 import SummonerSearch from "./SummonerSearch";
 
 class App extends React.Component {

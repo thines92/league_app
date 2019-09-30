@@ -9,5 +9,8 @@ export default axios.create({
 		"Accept-Language": "en-US,en;q=0.9",
 		"User-Agent":
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+	},
+	params: {
+		api_key: "RGAPI-32b2a033-8b6f-4db0-bc34-a235aeaaeb39"
 	}
 });

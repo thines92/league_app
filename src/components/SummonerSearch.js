@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { fetchSummoner } from "../actions";
 
 class SummonerSearch extends React.Component {
 	state = { summoner: "EnjoyYourBurrito" };
@@ -24,4 +26,13 @@ class SummonerSearch extends React.Component {
 		);
 	}
 }
-export default SummonerSearch;
+
+const mapStateToProps = state => {
+	return { summoner: state.summoner };
+};
+export default connect(
+	mapStateToProps,
+	{
+		fetchSummoner
+	}
+)(SummonerSearch);
