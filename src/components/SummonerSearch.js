@@ -6,7 +6,7 @@ class SummonerSearch extends React.Component {
 	state = { summoner: "EnjoyYourBurrito" };
 	onFormSubmit = async event => {
 		event.preventDefault();
-		this.props.onSubmit(this.state.summoner);
+		this.props.fetchSummoner(this.state.summoner);
 	};
 
 	render() {
