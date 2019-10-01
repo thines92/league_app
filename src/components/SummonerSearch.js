@@ -10,6 +10,7 @@ class SummonerSearch extends React.Component {
 		soloQueueRank: {
 			soloQueue: {
 				rank: "",
+				LP: null,
 				wins: null,
 				losses: null
 			}
@@ -53,6 +54,10 @@ class SummonerSearch extends React.Component {
 					<div className="detail">
 						{this.state.soloQueueRank.soloQueue.rank}
 					</div>
+				</div>
+				<div className="ui label">
+					LP:{" "}
+					<div className="detail">{this.state.soloQueueRank.soloQueue.LP}</div>
 				</div>
 				<div className="ui label">
 					Wins:{" "}

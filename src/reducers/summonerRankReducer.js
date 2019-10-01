@@ -8,6 +8,7 @@ export default (state = {}, action) => {
 		return {
 			soloQueue: {
 				rank: soloQueue.tier + " " + soloQueue.rank,
+				LP: soloQueue.leaguePoints,
 				wins: soloQueue.wins,
 				losses: soloQueue.losses
 			}
