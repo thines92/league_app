@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { fetchSummoner } from "../actions";
 
 class SummonerSearch extends React.Component {
-	state = { summoner: "EnjoyYourBurrito", summonerLevel: "" };
+	state = { summoner: "EnjoyYourBurrito", summonerData: {}, summonerLevel: "" };
 	onFormSubmit = async event => {
 		event.preventDefault();
 		await this.props.fetchSummoner(this.state.summoner);
-		this.setState({ summonerLevel: this.props.summonerLevel.summonerLevel });
+		this.setState({ summonerLevel: this.props.summonerData.summonerLevel });
 		console.log("state: " + JSON.stringify(this.state));
 		console.log("props: " + JSON.stringify(this.props));
 	};
@@ -33,7 +33,7 @@ class SummonerSearch extends React.Component {
 
 const mapStateToProps = state => {
 	console.log("mapStatetoProps state: " + JSON.stringify(state));
-	return { summonerLevel: state.summoner.data };
+	return { summonerData: state.summoner.data };
 };
 export default connect(
 	mapStateToProps,
