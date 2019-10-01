@@ -1,5 +1,7 @@
 export default (state = {}, action) => {
-	console.log("reducer summoner: " + JSON.stringify(state));
-	state.summoner = action.payload;
+	if (action.type === "FETCH_SUMMONER") {
+		console.log("action.payload: " + JSON.stringify(action.payload));
+		return action.payload;
+	}
 	return state;
 };

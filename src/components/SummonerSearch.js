@@ -8,6 +8,7 @@ class SummonerSearch extends React.Component {
 		event.preventDefault();
 		this.props.fetchSummoner(this.state.summoner);
 		console.log("state: " + JSON.stringify(this.state));
+		console.log("props: " + JSON.stringify(this.props));
 	};
 
 	render() {
@@ -29,6 +30,7 @@ class SummonerSearch extends React.Component {
 }
 
 const mapStateToProps = state => {
+	console.log("mapStatetoProps state: " + JSON.stringify(state));
 	return { summoner: state.summoner.data };
 };
 export default connect(
