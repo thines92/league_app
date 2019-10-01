@@ -4,9 +4,10 @@ import { fetchSummoner } from "../actions";
 
 class SummonerSearch extends React.Component {
 	state = { summoner: "EnjoyYourBurrito" };
-	onFormSubmit = async event => {
+	onFormSubmit = event => {
 		event.preventDefault();
 		this.props.fetchSummoner(this.state.summoner);
+		console.log(this.props);
 	};
 
 	render() {
@@ -28,6 +29,7 @@ class SummonerSearch extends React.Component {
 }
 
 const mapStateToProps = state => {
+	console.log("mapStateToProps " + JSON.stringify(state));
 	return { summoner: state.summoner };
 };
 export default connect(
