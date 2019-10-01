@@ -1,13 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchSummoner } from "../actions";
+import { fetchSummonerData, fetchSummonerRank } from "../actions";
 
 class SummonerSearch extends React.Component {
-	state = { summoner: "EnjoyYourBurrito", summonerData: {}, summonerLevel: "" };
+	state = {
+		summoner: "EnjoyYourBurrito",
+		summonerData: {},
+		summonerLevel: "",
+		summonerRank: ""
+	};
 	onFormSubmit = async event => {
 		event.preventDefault();
-		await this.props.fetchSummoner(this.state.summoner);
-		this.setState({ summonerLevel: this.props.summonerData.summonerLevel });
+		await this.props.fetchSummonerData(this.state.summoner);
+		this.setState({
+			summonerLevel: this.props.summonerData.summonerLevel,
+			summonerId: this.props.summonerData.id
+		});
+		await this.props.fetchSummonerRank(this.state.summonerId);
+		this.setState({
+			summonerRank:
+				this.props.summonerRank[0].tier + " " + this.props.summonerRank[0].rank
+		});
 		console.log("state: " + JSON.stringify(this.state));
 		console.log("props: " + JSON.stringify(this.props));
 	};
@@ -26,6 +39,7 @@ class SummonerSearch extends React.Component {
 					</button>
 				</form>
 				<div>{this.state.summonerLevel}</div>
+				<div>{this.state.summonerRank}</div>
 			</div>
 		);
 	}
@@ -33,11 +47,15 @@ class SummonerSearch extends React.Component {
 
 const mapStateToProps = state => {
 	console.log("mapStatetoProps state: " + JSON.stringify(state));
-	return { summonerData: state.summoner.data };
+	return {
+		summonerData: state.summonerData.data,
+		summonerRank: state.summonerRank.data
+	};
 };
 export default connect(
 	mapStateToProps,
 	{
-		fetchSummoner
+		fetchSummonerData,
+		fetchSummonerRank
 	}
 )(SummonerSearch);

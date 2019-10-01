@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import summonerReducer from "./summonerReducer";
+import summonerDataReducer from "./summonerDataReducer";
+import summonerRankReducer from "./summonerRankReducer";
 
 export default combineReducers({
-	summoner: summonerReducer
+	summonerData: summonerDataReducer,
+	summonerRank: summonerRankReducer
 });
