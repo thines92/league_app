@@ -7,7 +7,13 @@ class SummonerSearch extends React.Component {
 		summoner: "EnjoyYourBurrito",
 		summonerData: {},
 		summonerLevel: "",
-		summonerRank: ""
+		soloQueueRank: {
+			soloQueue: {
+				rank: "",
+				wins: null,
+				losses: null
+			}
+		}
 	};
 	onFormSubmit = async event => {
 		event.preventDefault();
@@ -18,8 +24,7 @@ class SummonerSearch extends React.Component {
 		});
 		await this.props.fetchSummonerRank(this.state.summonerId);
 		this.setState({
-			summonerRank:
-				this.props.summonerRank[0].tier + " " + this.props.summonerRank[0].rank
+			soloQueueRank: this.props.soloQueueRank
 		});
 		console.log("state: " + JSON.stringify(this.state));
 		console.log("props: " + JSON.stringify(this.props));
@@ -28,18 +33,39 @@ class SummonerSearch extends React.Component {
 	render() {
 		return (
 			<div className="ui segment">
-				<form onSubmit={this.onFormSubmit}>
-					<input
-						className="ui input"
-						value={this.state.summoner}
-						onChange={e => this.setState({ summoner: e.target.value })}
-					/>
-					<button className="ui button" type="submit">
-						Search
-					</button>
+				<form className="ui form" onSubmit={this.onFormSubmit}>
+					<div className="inline fields">
+						<input
+							className="ui input"
+							value={this.state.summoner}
+							onChange={e => this.setState({ summoner: e.target.value })}
+						/>
+						<button className="ui button" type="submit">
+							Search
+						</button>
+					</div>
 				</form>
-				<div>{this.state.summonerLevel}</div>
-				<div>{this.state.summonerRank}</div>
+				<div className="ui label">
+					Level: <div className="detail">{this.state.summonerLevel}</div>
+				</div>
+				<div className="ui label">
+					Rank:{" "}
+					<div className="detail">
+						{this.state.soloQueueRank.soloQueue.rank}
+					</div>
+				</div>
+				<div className="ui label">
+					Wins:{" "}
+					<div className="detail">
+						{this.state.soloQueueRank.soloQueue.wins}
+					</div>
+				</div>
+				<div className="ui label">
+					Losses:{" "}
+					<div className="detail">
+						{this.state.soloQueueRank.soloQueue.losses}
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -49,7 +75,7 @@ const mapStateToProps = state => {
 	console.log("mapStatetoProps state: " + JSON.stringify(state));
 	return {
 		summonerData: state.summonerData.data,
-		summonerRank: state.summonerRank.data
+		soloQueueRank: state.summonerRank
 	};
 };
 export default connect(
