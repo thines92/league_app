@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSummonerData, fetchSummonerRank } from "../actions";
+import SummonerRank from "./SummonerRank";
 
 class SummonerSearch extends React.Component {
 	state = {
@@ -27,8 +28,6 @@ class SummonerSearch extends React.Component {
 		this.setState({
 			soloQueueRank: this.props.soloQueueRank
 		});
-		console.log("state: " + JSON.stringify(this.state));
-		console.log("props: " + JSON.stringify(this.props));
 	};
 
 	render() {
@@ -49,35 +48,7 @@ class SummonerSearch extends React.Component {
 				<div className="ui label">
 					Level: <div className="detail">{this.state.summonerLevel}</div>
 				</div>
-				<div className="ui segment">
-					<div className="ui label">
-						Solo Queue:
-						<div className="ui label">
-							Rank:{" "}
-							<div className="detail">
-								{this.state.soloQueueRank.soloQueue.rank}
-							</div>
-						</div>
-						<div className="ui label">
-							LP:{" "}
-							<div className="detail">
-								{this.state.soloQueueRank.soloQueue.LP}
-							</div>
-						</div>
-						<div className="ui label">
-							Wins:{" "}
-							<div className="detail">
-								{this.state.soloQueueRank.soloQueue.wins}
-							</div>
-						</div>
-						<div className="ui label">
-							Losses:{" "}
-							<div className="detail">
-								{this.state.soloQueueRank.soloQueue.losses}
-							</div>
-						</div>
-					</div>
-				</div>
+				<SummonerRank soloQueueRank={this.state.soloQueueRank} />
 			</div>
 		);
 	}
