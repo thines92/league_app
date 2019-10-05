@@ -5,7 +5,7 @@ export const fetchSummonerData = summoner => async dispatch => {
 		`lol/summoner/v4/summoners/by-name/${summoner}`
 	);
 
-	dispatch({ type: "FETCH_SUMMONER", payload: response });
+	dispatch({ type: "FETCH_SUMMONER", payload: response.data });
 };
 
 export const fetchSummonerRank = summonerId => async dispatch => {
@@ -14,5 +14,5 @@ export const fetchSummonerRank = summonerId => async dispatch => {
 		`/lol/league/v4/entries/by-summoner/${summonerId}`
 	);
 
-	dispatch({ type: "FETCH_SUMMONER_RANK", payload: response });
+	dispatch({ type: "FETCH_SUMMONER_RANK", payload: response.data });
 };

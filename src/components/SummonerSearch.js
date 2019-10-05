@@ -86,7 +86,7 @@ class SummonerSearch extends React.Component {
 const mapStateToProps = state => {
 	console.log("mapStatetoProps state: " + JSON.stringify(state));
 	return {
-		summonerData: state.summonerData.data,
+		summonerData: state.summonerData,
 		soloQueueRank: state.summonerRank
 	};
 };
