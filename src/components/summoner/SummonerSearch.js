@@ -1,77 +1,72 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchSummonerData, fetchSummonerRank } from "../actions";
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchSummonerData, fetchSummonerRank } from '../../actions';
+import SummonerForm from './SummonerForm';
 
 class SummonerSearch extends React.Component {
 	state = {
-		summoner: "EnjoyYourBurrito",
+		summoner: 'EnjoyYourBurrito',
 		summonerData: {},
-		summonerLevel: "",
+		summonerLevel: '',
 		soloQueueRank: {
 			soloQueue: {
-				rank: "",
+				rank: '',
 				LP: null,
 				wins: null,
-				losses: null
-			}
-		}
+				losses: null,
+			},
+		},
 	};
-	onFormSubmit = async event => {
+	onFormSubmit = async (event) => {
 		event.preventDefault();
 		await this.props.fetchSummonerData(this.state.summoner);
 		this.setState({
 			summonerLevel: this.props.summonerData.summonerLevel,
-			summonerId: this.props.summonerData.id
+			summonerId: this.props.summonerData.id,
 		});
 		await this.props.fetchSummonerRank(this.state.summonerId);
 		this.setState({
-			soloQueueRank: this.props.soloQueueRank
+			soloQueueRank: this.props.soloQueueRank,
 		});
-		console.log("state: " + JSON.stringify(this.state));
-		console.log("props: " + JSON.stringify(this.props));
+		console.log('state: ' + JSON.stringify(this.state));
+		console.log('props: ' + JSON.stringify(this.props));
 	};
+
+	onSubmit(props) {
+		console.log('onSubmit props', props);
+	}
 
 	render() {
 		return (
 			<div className="ui segment">
-				<form className="ui form" onSubmit={this.onFormSubmit}>
-					<div className="inline fields">
-						<input
-							className="ui input"
-							value={this.state.summoner}
-							onChange={e => this.setState({ summoner: e.target.value })}
-						/>
-						<button className="ui button" type="submit">
-							Search
-						</button>
-					</div>
-				</form>
+				<SummonerForm onSubmit={this.onSubmit} />
 				<div className="ui label">
-					Level: <div className="detail">{this.state.summonerLevel}</div>
+					Level:{' '}
+					<div className="detail">{this.state.summonerLevel}</div>
 				</div>
 				<div className="ui segment">
 					<div className="ui label">
 						Solo Queue:
 						<div className="ui label">
-							Rank:{" "}
+							Rank:{' '}
 							<div className="detail">
 								{this.state.soloQueueRank.soloQueue.rank}
 							</div>
 						</div>
 						<div className="ui label">
-							LP:{" "}
+							LP:{' '}
 							<div className="detail">
 								{this.state.soloQueueRank.soloQueue.LP}
 							</div>
 						</div>
 						<div className="ui label">
-							Wins:{" "}
+							Wins:{' '}
 							<div className="detail">
 								{this.state.soloQueueRank.soloQueue.wins}
 							</div>
 						</div>
 						<div className="ui label">
-							Losses:{" "}
+							Losses:{' '}
 							<div className="detail">
 								{this.state.soloQueueRank.soloQueue.losses}
 							</div>
@@ -83,17 +78,14 @@ class SummonerSearch extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
-	console.log("mapStatetoProps state: " + JSON.stringify(state));
+const mapStateToProps = (state) => {
+	console.log('mapStatetoProps state: ' + JSON.stringify(state));
 	return {
 		summonerData: state.summonerData.data,
-		soloQueueRank: state.summonerRank
+		soloQueueRank: state.summonerRank,
 	};
 };
-export default connect(
-	mapStateToProps,
-	{
-		fetchSummonerData,
-		fetchSummonerRank
-	}
-)(SummonerSearch);
+export default connect(mapStateToProps, {
+	fetchSummonerData,
+	fetchSummonerRank,
+})(SummonerSearch);

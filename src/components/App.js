@@ -1,13 +1,13 @@
-import React from "react";
-import SummonerSearch from "./SummonerSearch";
+import React from 'react';
+import SummonerSearch from './summoner/SummonerSearch';
 
 class App extends React.Component {
-	state = { summonerData: "" };
+	state = { summonerData: '' };
 
 	render() {
 		return (
 			<div className="ui container">
-				<SummonerSearch onSubmit={this.onSearchSubmit} />
+				<SummonerSearch />
 			</div>
 		);
 	}
