@@ -32,14 +32,18 @@ class SummonerSearch extends React.Component {
 		console.log('props: ' + JSON.stringify(this.props));
 	};
 
-	onSubmit(props) {
+	onSubmit = (props) => {
 		console.log('onSubmit props', props);
-	}
+		this.props.fetchSummonerRank(props.summonerName);
+	};
 
 	render() {
 		return (
 			<div className="ui segment">
-				<SummonerForm onSubmit={this.onSubmit} />
+				<SummonerForm
+					initialValues={{ summonerName: 'EnjoyYourBurrito' }}
+					onSubmit={this.onSubmit}
+				/>
 				<div className="ui label">
 					Level:{' '}
 					<div className="detail">{this.state.summonerLevel}</div>
